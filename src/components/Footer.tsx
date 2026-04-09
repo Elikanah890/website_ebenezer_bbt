@@ -77,7 +77,7 @@ export default function Footer() {
               <a href="https://www.facebook.com/search/top?q=pamoja%20ebenezer" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-secondary-foreground/10 flex items-center justify-center hover:bg-secondary-foreground/20 transition-colors touch-feedback" aria-label="Facebook">
                 <Facebook className="w-5 h-5" />
               </a>
-              <a href="https://www.youtube.com/@pamojaebenezer" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-secondary-foreground/10 flex items-center justify-center hover:bg-secondary-foreground/20 transition-colors touch-feedback" aria-label="YouTube">
+              <a href="https://www.youtube.com/@pamojaEbenezerCollege" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-secondary-foreground/10 flex items-center justify-center hover:bg-secondary-foreground/20 transition-colors touch-feedback" aria-label="YouTube">
                 <Youtube className="w-5 h-5" />
               </a>
             </div>
