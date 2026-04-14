@@ -1,52 +1,85 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- Home -->
   <url>
-    <loc>https://YOUR_DOMAIN_HERE/</loc>
+    <loc>https://pamojebenezercollege.ac.tz/</loc>
     <priority>1.0</priority>
     <changefreq>daily</changefreq>
+    <lastmod>2026-04-14</lastmod>
+  </url>
+
+  <!-- Core Pages -->
+  <url>
+    <loc>https://pamojebenezercollege.ac.tz/about</loc>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+    <lastmod>2026-04-14</lastmod>
   </url>
 
   <url>
-    <loc>https://YOUR_DOMAIN_HERE/about</loc>
+    <loc>https://pamojebenezercollege.ac.tz/courses</loc>
+    <priority>0.9</priority>
+    <changefreq>weekly</changefreq>
+    <lastmod>2026-04-14</lastmod>
+  </url>
+
+  <url>
+    <loc>https://pamojebenezercollege.ac.tz/admissions</loc>
+    <priority>0.9</priority>
+    <changefreq>monthly</changefreq>
+    <lastmod>2026-04-14</lastmod>
+  </url>
+
+  <url>
+    <loc>https://pamojebenezercollege.ac.tz/contact</loc>
     <priority>0.8</priority>
     <changefreq>monthly</changefreq>
+    <lastmod>2026-04-14</lastmod>
   </url>
 
+  <!-- Academic / Info Pages -->
   <url>
-    <loc>https://YOUR_DOMAIN_HERE/courses</loc>
-    <priority>0.9</priority>
-    <changefreq>weekly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://YOUR_DOMAIN_HERE/admissions</loc>
-    <priority>0.9</priority>
+    <loc>https://pamojebenezercollege.ac.tz/organization</loc>
+    <priority>0.8</priority>
     <changefreq>monthly</changefreq>
+    <lastmod>2026-04-14</lastmod>
   </url>
 
   <url>
-    <loc>https://YOUR_DOMAIN_HERE/contact</loc>
-    <priority>0.9</priority>
-    <changefreq>monthly</changefreq>
-  </url>
-
-  <url>
-    <loc>https://YOUR_DOMAIN_HERE/gallery</loc>
+    <loc>https://pamojebenezercollege.ac.tz/student-life</loc>
     <priority>0.7</priority>
     <changefreq>monthly</changefreq>
+    <lastmod>2026-04-14</lastmod>
   </url>
 
   <url>
-    <loc>https://YOUR_DOMAIN_HERE/news</loc>
+    <loc>https://pamojebenezercollege.ac.tz/impact</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <lastmod>2026-04-14</lastmod>
+  </url>
+
+  <!-- Content Pages -->
+  <url>
+    <loc>https://pamojebenezercollege.ac.tz/gallery</loc>
+    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <lastmod>2026-04-14</lastmod>
+  </url>
+
+  <url>
+    <loc>https://pamojebenezercollege.ac.tz/news</loc>
     <priority>0.7</priority>
     <changefreq>weekly</changefreq>
+    <lastmod>2026-04-14</lastmod>
   </url>
 
   <url>
-    <loc>https://YOUR_DOMAIN_HERE/faq</loc>
+    <loc>https://pamojebenezercollege.ac.tz/faq</loc>
     <priority>0.6</priority>
     <changefreq>monthly</changefreq>
+    <lastmod>2026-04-14</lastmod>
   </url>
 
 </urlset>

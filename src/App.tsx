@@ -1,4 +1,5 @@
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Organization from "./pages/Organization"; 
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -48,6 +49,10 @@ const App = () => {
                 <Route path="/gallery" element={<Gallery />} />
                 <Route path="/contact" element={<Contact />} />
                 <Route path="/faq" element={<FAQ />} />
+
+                {/*  ADDED*/}
+                <Route path="/organization" element={<Organization />} />
+
                 <Route path="*" element={<NotFound />} />
               </Routes>
 

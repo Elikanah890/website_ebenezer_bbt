@@ -1,7 +1,7 @@
 import { useI18n } from "@/lib/i18n";
 import ScrollReveal from "@/components/ScrollReveal";
 import { History, Eye, Target, Heart, Award, Users, Lightbulb, Handshake, Building } from "lucide-react";
-import { Helmet } from "react-helmet-async"; // ✅ SEO
+import { Helmet } from "react-helmet-async";
 
 const values = [
   { key: "value1", icon: Award },
@@ -14,28 +14,85 @@ const values = [
 export default function AboutPage() {
   const { t } = useI18n();
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollegeOrUniversity",
+    "name": "Pamoja Ebenezer College of Agriculture",
+    "url": "https://pamojebenezercollege.ac.tz",
+    "description":
+      "Agriculture and vocational training college in Babati, Tanzania offering practical education in agriculture, ICT, and technical skills.",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Babati",
+      "addressRegion": "Manyara",
+      "addressCountry": "TZ"
+    }
+  };
+
   return (
     <>
-      {/* ✅ SEO */}
       <Helmet>
-        <title>About Pamoja Ebenezer College | Agriculture College in Tanzania</title>
+        <html lang="en" />
+
+        {/* Primary SEO */}
+        <title>
+          About Pamoja Ebenezer College of Agriculture | Babati Tanzania
+        </title>
+
         <meta
           name="description"
-          content="Learn about Pamoja Ebenezer College of Agriculture in Babati, Tanzania. Discover our mission, vision, and commitment to practical vocational training in agriculture, sewing, and technology."
+          content="Learn about Pamoja Ebenezer College of Agriculture in Babati, Tanzania. Discover our mission, vision, and practical vocational training in agriculture, ICT, and skills development."
         />
+
         <meta
           name="keywords"
-          content="about college Tanzania, agriculture college Babati, vocational training Tanzania, NACTVET college Tanzania"
+          content="Pamoja Ebenezer College, agriculture college Tanzania, Babati college, vocational training Tanzania, NACTVET, agricultural education Tanzania"
         />
-        <meta name="author" content="Pamoja Ebenezer College" />
 
-        {/* Social Sharing */}
-        <meta property="og:title" content="About Pamoja Ebenezer College" />
+        <meta name="author" content="Pamoja Ebenezer College of Agriculture" />
+        <meta name="robots" content="index, follow" />
+
+        {/* Canonical (VERY IMPORTANT) */}
+        <link rel="canonical" href="https://pamojebenezercollege.ac.tz/about" />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta
+          property="og:title"
+          content="About Pamoja Ebenezer College of Agriculture"
+        />
         <meta
           property="og:description"
           content="Discover the mission, vision, and values of Pamoja Ebenezer College of Agriculture in Tanzania."
         />
-        <meta property="og:type" content="website" />
+        <meta
+          property="og:url"
+          content="https://pamojebenezercollege.ac.tz/about"
+        />
+        <meta
+          property="og:image"
+          content="https://pamojebenezercollege.ac.tz/hero-bg.jpg"
+        />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta
+          name="twitter:title"
+          content="About Pamoja Ebenezer College of Agriculture"
+        />
+        <meta
+          name="twitter:description"
+          content="Agriculture and vocational training college in Tanzania focusing on practical skills and innovation."
+        />
+        <meta
+          name="twitter:image"
+          content="https://pamojebenezercollege.ac.tz/hero-bg.jpg"
+        />
+
+        {/* Schema.org */}
+        <script type="application/ld+json">
+          {JSON.stringify(jsonLd)}
+        </script>
       </Helmet>
 
       <main className="pt-20 lg:pt-24">
@@ -64,9 +121,11 @@ export default function AboutPage() {
                     {t("about.historyTitle")}
                   </h2>
                 </div>
+
                 <p className="text-muted-foreground leading-relaxed mb-4">
                   {t("about.history")}
                 </p>
+
                 <p className="text-muted-foreground leading-relaxed">
                   {t("about.history2")}
                 </p>
@@ -82,9 +141,7 @@ export default function AboutPage() {
               <ScrollReveal>
                 <div className="bg-card rounded-xl p-8 card-shadow h-full">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-college-green-light flex items-center justify-center">
-                      <Eye className="w-5 h-5 text-primary" />
-                    </div>
+                    <Eye className="w-5 h-5 text-primary" />
                     <h2 className="text-xl font-heading font-bold text-foreground">
                       {t("about.visionTitle")}
                     </h2>
@@ -98,9 +155,7 @@ export default function AboutPage() {
               <ScrollReveal delay={100}>
                 <div className="bg-card rounded-xl p-8 card-shadow h-full">
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="w-10 h-10 rounded-lg bg-college-blue-light flex items-center justify-center">
-                      <Target className="w-5 h-5 text-secondary" />
-                    </div>
+                    <Target className="w-5 h-5 text-secondary" />
                     <h2 className="text-xl font-heading font-bold text-foreground">
                       {t("about.missionTitle")}
                     </h2>

@@ -1,9 +1,12 @@
 User-agent: *
 Allow: /
 
-# Block admin or unwanted internal routes (future-proof)
+# Optional: block future private areas
 Disallow: /admin/
 Disallow: /dashboard/
 
-# Sitemap location (update after hosting)
-Sitemap: https://YOUR_DOMAIN_HERE/sitemap.xml
+# Sitemap
+Sitemap: https://pamojebenezercollege.ac.tz/sitemap.xml
+
+# Preferred host
+Host: pamojebenezercollege.ac.tz

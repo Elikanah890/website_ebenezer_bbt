@@ -2,6 +2,7 @@ import { Calendar, Clock, ArrowRight } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import { Button } from "@/components/ui/button";
 import ScrollReveal from "@/components/ScrollReveal";
+import { Helmet } from "react-helmet-async";
 
 const upcomingEvents = [
   { date: "2026-05-15", title_en: "Open Day & Campus Tour", title_sw: "Siku ya Wazi na Ziara ya Chuo", desc_en: "Visit our campus, meet faculty, and explore our programs. Free entry for all!", desc_sw: "Tembelea chuo chetu, kutana na walimu, na kuchunguza programu zetu. Kuingia bure!", category: "event" },
@@ -29,111 +30,154 @@ export default function NewsEvents() {
   const { t, lang } = useI18n();
 
   return (
-    <main className="pt-20 lg:pt-24 pb-20 lg:pb-0">
-      {/* Hero */}
-      <section className="gradient-hero section-padding">
-        <div className="section-container text-center">
-          <ScrollReveal>
-            <h1 className="text-3xl lg:text-5xl font-heading font-extrabold text-primary-foreground mb-4">
-              {t("news.title")}
-            </h1>
-            <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">
-              {t("news.subtitle")}
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+    <>
+      {/* SEO ENHANCEMENT */}
+      <Helmet>
+        <title>News & Events | Pamoja Ebenezer College Tanzania</title>
+        <meta
+          name="description"
+          content="Stay updated with news, announcements, and events at Pamoja Ebenezer College of Agriculture in Tanzania. Open days, admissions, and student activities."
+        />
+        <meta
+          name="keywords"
+          content="college events Tanzania, agriculture college news, Babati college updates, NACTVET events, vocational training Tanzania"
+        />
+        <meta property="og:title" content="News & Events | Pamoja Ebenezer College" />
+        <meta
+          property="og:description"
+          content="Latest updates, announcements, and events from Pamoja Ebenezer College."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
 
-      {/* Upcoming Events */}
-      <section className="section-padding">
-        <div className="section-container">
-          <ScrollReveal>
-            <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-12">
-              {t("news.upcoming")}
-            </h2>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {upcomingEvents.map((event, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
-                <div className="bg-card rounded-xl border border-border overflow-hidden card-shadow hover:card-shadow-hover hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
-                  <div className="gradient-hero p-4">
-                    <div className="flex items-center gap-2 text-primary-foreground/80 text-sm">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "EventSeries",
+            name: "Pamoja Ebenezer College Events",
+            events: upcomingEvents.map((e) => ({
+              "@type": "Event",
+              name: lang === "sw" ? e.title_sw : e.title_en,
+              description: lang === "sw" ? e.desc_sw : e.desc_en,
+              startDate: e.date,
+            })),
+          }),
+        }}
+      />
+
+      <main className="pt-20 lg:pt-24 pb-20 lg:pb-0">
+        {/* Hero */}
+        <section className="gradient-hero section-padding" aria-label="News and Events header">
+          <div className="section-container text-center">
+            <ScrollReveal>
+              <h1 className="text-3xl lg:text-5xl font-heading font-extrabold text-primary-foreground mb-4">
+                {t("news.title")}
+              </h1>
+              <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">
+                {t("news.subtitle")}
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* Upcoming Events */}
+        <section className="section-padding" aria-label="Upcoming events">
+          <div className="section-container">
+            <ScrollReveal>
+              <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-12">
+                {t("news.upcoming")}
+              </h2>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {upcomingEvents.map((event, i) => (
+                <ScrollReveal key={i} delay={i * 100}>
+                  <div className="bg-card rounded-xl border border-border overflow-hidden card-shadow hover:card-shadow-hover hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
+                    <div className="gradient-hero p-4">
+                      <div className="flex items-center gap-2 text-primary-foreground/80 text-sm">
+                        <Calendar className="w-4 h-4" />
+                        {formatDate(event.date)}
+                      </div>
+                    </div>
+                    <div className="p-6 flex-1 flex flex-col">
+                      <h3 className="font-heading font-bold text-lg mb-2 text-foreground">
+                        {lang === "sw" ? event.title_sw : event.title_en}
+                      </h3>
+                      <p className="text-sm text-muted-foreground flex-1">
+                        {lang === "sw" ? event.desc_sw : event.desc_en}
+                      </p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Announcements */}
+        <section className="section-padding bg-muted" aria-label="Announcements">
+          <div className="section-container">
+            <ScrollReveal>
+              <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-12">
+                {t("news.announcements")}
+              </h2>
+            </ScrollReveal>
+
+            <div className="max-w-3xl mx-auto space-y-6">
+              {announcements.map((item, i) => (
+                <ScrollReveal key={i} delay={i * 100}>
+                  <div className="bg-card rounded-xl border border-border p-6 card-shadow">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
+                      <Clock className="w-4 h-4" />
+                      {formatDate(item.date)}
+                    </div>
+                    <h3 className="font-heading font-bold text-lg mb-2 text-foreground">
+                      {lang === "sw" ? item.title_sw : item.title_en}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {lang === "sw" ? item.desc_sw : item.desc_en}
+                    </p>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Past Events */}
+        <section className="section-padding" aria-label="Past events">
+          <div className="section-container">
+            <ScrollReveal>
+              <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-12">
+                {t("news.past")}
+              </h2>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {pastEvents.map((event, i) => (
+                <ScrollReveal key={i} delay={i * 100}>
+                  <div className="bg-card rounded-xl border border-border p-6 card-shadow h-full">
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
                       <Calendar className="w-4 h-4" />
                       {formatDate(event.date)}
                     </div>
-                  </div>
-                  <div className="p-6 flex-1 flex flex-col">
-                    <h3 className="font-heading font-bold text-lg mb-2 text-foreground">
+                    <h3 className="font-heading font-bold text-base mb-2 text-foreground">
                       {lang === "sw" ? event.title_sw : event.title_en}
                     </h3>
-                    <p className="text-sm text-muted-foreground flex-1">
+                    <p className="text-sm text-muted-foreground">
                       {lang === "sw" ? event.desc_sw : event.desc_en}
                     </p>
                   </div>
-                </div>
-              </ScrollReveal>
-            ))}
+                </ScrollReveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-
-      {/* Announcements */}
-      <section className="section-padding bg-muted">
-        <div className="section-container">
-          <ScrollReveal>
-            <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-12">
-              {t("news.announcements")}
-            </h2>
-          </ScrollReveal>
-          <div className="max-w-3xl mx-auto space-y-6">
-            {announcements.map((item, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
-                <div className="bg-card rounded-xl border border-border p-6 card-shadow">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-2">
-                    <Clock className="w-4 h-4" />
-                    {formatDate(item.date)}
-                  </div>
-                  <h3 className="font-heading font-bold text-lg mb-2 text-foreground">
-                    {lang === "sw" ? item.title_sw : item.title_en}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {lang === "sw" ? item.desc_sw : item.desc_en}
-                  </p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Past Events */}
-      <section className="section-padding">
-        <div className="section-container">
-          <ScrollReveal>
-            <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-12">
-              {t("news.past")}
-            </h2>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {pastEvents.map((event, i) => (
-              <ScrollReveal key={i} delay={i * 100}>
-                <div className="bg-card rounded-xl border border-border p-6 card-shadow h-full">
-                  <div className="flex items-center gap-2 text-sm text-muted-foreground mb-3">
-                    <Calendar className="w-4 h-4" />
-                    {formatDate(event.date)}
-                  </div>
-                  <h3 className="font-heading font-bold text-base mb-2 text-foreground">
-                    {lang === "sw" ? event.title_sw : event.title_en}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {lang === "sw" ? event.desc_sw : event.desc_en}
-                  </p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-    </main>
+        </section>
+      </main>
+    </>
   );
 }

@@ -4,6 +4,7 @@ import { useI18n } from "@/lib/i18n";
 import { Input } from "@/components/ui/input";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import ScrollReveal from "@/components/ScrollReveal";
+import { Helmet } from "react-helmet-async"; // ✅ ADDED FOR SEO
 
 interface FaqItem {
   q_en: string;
@@ -112,79 +113,122 @@ export default function FAQ() {
   });
 
   return (
-    <main className="pt-20 lg:pt-24 pb-20 lg:pb-0">
-      {/* Hero */}
-      <section className="gradient-hero section-padding">
-        <div className="section-container text-center">
-          <ScrollReveal>
-            <h1 className="text-3xl lg:text-5xl font-heading font-extrabold text-primary-foreground mb-4">
-              {t("faq.title")}
-            </h1>
-            <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">
-              {t("faq.subtitle")}
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+    <>
+      {/* ✅ SEO BLOCK ADDED */}
+      <Helmet>
+        <title>FAQ | Pamoja Ebenezer College Tanzania</title>
+        <meta
+          name="description"
+          content="Find answers about admissions, courses, fees, and campus life at Pamoja Ebenezer College of Agriculture in Tanzania."
+        />
+        <meta
+          name="keywords"
+          content="college FAQ Tanzania, admissions Tanzania, vocational training FAQ, Babati college questions"
+        />
+        <link rel="canonical" href="https://pamojebenezercollege.ac.tz/faq" />
 
-      <section className="section-padding">
-        <div className="section-container max-w-3xl">
-          {/* Search */}
-          <ScrollReveal>
-            <div className="relative mb-8">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-              <Input
-                type="search"
-                placeholder={t("faq.searchPlaceholder")}
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="pl-10"
-              />
-            </div>
-          </ScrollReveal>
+        {/* Open Graph */}
+        <meta property="og:title" content="FAQ | Pamoja Ebenezer College" />
+        <meta property="og:description" content="Answers about admissions, courses, and fees at Pamoja Ebenezer College." />
+        <meta property="og:type" content="website" />
 
-          {/* Category Filters */}
-          <ScrollReveal>
-            <div className="flex flex-wrap gap-2 mb-8">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors touch-feedback ${
-                    activeCategory === cat
-                      ? "bg-primary text-primary-foreground"
-                      : "bg-muted text-muted-foreground hover:bg-border"
-                  }`}
-                >
-                  {t(`faq.cat.${cat}`)}
-                </button>
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="FAQ | Pamoja Ebenezer College" />
+        <meta name="twitter:description" content="Find answers about admissions, courses, and fees." />
+
+        {/* Structured Data (SEO BOOST) */}
+        <script type="application/ld+json">
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqs.map((f) => ({
+              "@type": "Question",
+              "name": f.q_en,
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": f.a_en
+              }
+            }))
+          })}
+        </script>
+      </Helmet>
+
+      <main className="pt-20 lg:pt-24 pb-20 lg:pb-0">
+        {/* Hero */}
+        <section className="gradient-hero section-padding">
+          <div className="section-container text-center">
+            <ScrollReveal>
+              <h1 className="text-3xl lg:text-5xl font-heading font-extrabold text-primary-foreground mb-4">
+                {t("faq.title")}
+              </h1>
+              <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">
+                {t("faq.subtitle")}
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        <section className="section-padding">
+          <div className="section-container max-w-3xl">
+            {/* Search */}
+            <ScrollReveal>
+              <div className="relative mb-8">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <Input
+                  type="search"
+                  placeholder={t("faq.searchPlaceholder")}
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  className="pl-10"
+                  aria-label="Search FAQ"
+                />
+              </div>
+            </ScrollReveal>
+
+            {/* Category Filters */}
+            <ScrollReveal>
+              <div className="flex flex-wrap gap-2 mb-8">
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    className={`px-4 py-2 rounded-full text-sm font-medium transition-colors touch-feedback ${
+                      activeCategory === cat
+                        ? "bg-primary text-primary-foreground"
+                        : "bg-muted text-muted-foreground hover:bg-border"
+                    }`}
+                  >
+                    {t(`faq.cat.${cat}`)}
+                  </button>
+                ))}
+              </div>
+            </ScrollReveal>
+
+            {/* Accordion */}
+            <Accordion type="single" collapsible className="space-y-3">
+              {filtered.map((faq, i) => (
+                <ScrollReveal key={i} delay={i * 50}>
+                  <AccordionItem value={`faq-${i}`} className="bg-card rounded-xl border border-border px-6 card-shadow">
+                    <AccordionTrigger className="text-left font-heading font-semibold text-foreground">
+                      {lang === "sw" ? faq.q_sw : faq.q_en}
+                    </AccordionTrigger>
+                    <AccordionContent className="text-muted-foreground">
+                      {lang === "sw" ? faq.a_sw : faq.a_en}
+                    </AccordionContent>
+                  </AccordionItem>
+                </ScrollReveal>
               ))}
-            </div>
-          </ScrollReveal>
+            </Accordion>
 
-          {/* Accordion */}
-          <Accordion type="single" collapsible className="space-y-3">
-            {filtered.map((faq, i) => (
-              <ScrollReveal key={i} delay={i * 50}>
-                <AccordionItem value={`faq-${i}`} className="bg-card rounded-xl border border-border px-6 card-shadow">
-                  <AccordionTrigger className="text-left font-heading font-semibold text-foreground">
-                    {lang === "sw" ? faq.q_sw : faq.q_en}
-                  </AccordionTrigger>
-                  <AccordionContent className="text-muted-foreground">
-                    {lang === "sw" ? faq.a_sw : faq.a_en}
-                  </AccordionContent>
-                </AccordionItem>
-              </ScrollReveal>
-            ))}
-          </Accordion>
-
-          {filtered.length === 0 && (
-            <p className="text-center text-muted-foreground py-12">
-              {t("faq.noResults")}
-            </p>
-          )}
-        </div>
-      </section>
-    </main>
+            {filtered.length === 0 && (
+              <p className="text-center text-muted-foreground py-12">
+                {t("faq.noResults")}
+              </p>
+            )}
+          </div>
+        </section>
+      </main>
+    </>
   );
 }

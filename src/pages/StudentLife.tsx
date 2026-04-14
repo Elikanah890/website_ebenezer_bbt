@@ -1,6 +1,7 @@
 import { Users, Trophy, Music, Compass, Heart, BookOpen } from "lucide-react";
 import { useI18n } from "@/lib/i18n";
 import ScrollReveal from "@/components/ScrollReveal";
+import { Helmet } from "react-helmet-async";
 
 const clubs = [
   { key: "farming", icon: Compass, color: "bg-college-green-light text-primary" },
@@ -26,96 +27,129 @@ export default function StudentLife() {
   const { t, lang } = useI18n();
 
   return (
-    <main className="pt-20 lg:pt-24 pb-20 lg:pb-0">
-      {/* Hero */}
-      <section className="gradient-hero section-padding">
-        <div className="section-container text-center">
-          <ScrollReveal>
-            <h1 className="text-3xl lg:text-5xl font-heading font-extrabold text-primary-foreground mb-4">
-              {t("studentLife.title")}
-            </h1>
-            <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">
-              {t("studentLife.subtitle")}
-            </p>
-          </ScrollReveal>
-        </div>
-      </section>
+    <>
+      {/* SEO */}
+      <Helmet>
+        <title>Student Life | Pamoja Ebenezer College Tanzania</title>
+        <meta
+          name="description"
+          content="Explore student life at Pamoja Ebenezer College including clubs, daily schedule, and student support services in Tanzania."
+        />
+        <meta
+          name="keywords"
+          content="student life Tanzania, college clubs Tanzania, vocational college schedule, Babati college activities"
+        />
+        <meta property="og:title" content="Student Life | Pamoja Ebenezer College" />
+        <meta
+          property="og:description"
+          content="Clubs, daily routines, and student support services at Pamoja Ebenezer College."
+        />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
 
-      {/* Clubs */}
-      <section className="section-padding">
-        <div className="section-container">
-          <ScrollReveal>
-            <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-3">
-              {t("studentLife.clubsTitle")}
-            </h2>
-            <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
-              {t("studentLife.clubsSubtitle")}
-            </p>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {clubs.map((club, i) => (
-              <ScrollReveal key={club.key} delay={i * 80}>
-                <div className="bg-card rounded-xl border border-border p-6 card-shadow hover:card-shadow-hover hover:-translate-y-1 transition-all duration-300 touch-feedback h-full">
-                  <div className={`w-12 h-12 rounded-lg ${club.color} flex items-center justify-center mb-4`}>
-                    <club.icon className="w-6 h-6" />
+      <main className="pt-20 lg:pt-24 pb-20 lg:pb-0">
+        {/* Hero */}
+        <section className="gradient-hero section-padding" aria-label="Student life overview">
+          <div className="section-container text-center">
+            <ScrollReveal>
+              <h1 className="text-3xl lg:text-5xl font-heading font-extrabold text-primary-foreground mb-4">
+                {t("studentLife.title")}
+              </h1>
+              <p className="text-primary-foreground/80 max-w-2xl mx-auto text-lg">
+                {t("studentLife.subtitle")}
+              </p>
+            </ScrollReveal>
+          </div>
+        </section>
+
+        {/* Clubs */}
+        <section className="section-padding" aria-label="Student clubs">
+          <div className="section-container">
+            <ScrollReveal>
+              <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-3">
+                {t("studentLife.clubsTitle")}
+              </h2>
+              <p className="text-muted-foreground text-center max-w-2xl mx-auto mb-12">
+                {t("studentLife.clubsSubtitle")}
+              </p>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {clubs.map((club, i) => (
+                <ScrollReveal key={club.key} delay={i * 80}>
+                  <div className="bg-card rounded-xl border border-border p-6 card-shadow hover:card-shadow-hover hover:-translate-y-1 transition-all duration-300 touch-feedback h-full">
+                    <div className={`w-12 h-12 rounded-lg ${club.color} flex items-center justify-center mb-4`}>
+                      <club.icon className="w-6 h-6" />
+                    </div>
+                    <h3 className="font-heading font-bold text-lg mb-2 text-foreground">
+                      {t(`studentLife.club.${club.key}`)}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {t(`studentLife.club.${club.key}Desc`)}
+                    </p>
                   </div>
-                  <h3 className="font-heading font-bold text-lg mb-2 text-foreground">
-                    {t(`studentLife.club.${club.key}`)}
-                  </h3>
-                  <p className="text-sm text-muted-foreground">
-                    {t(`studentLife.club.${club.key}Desc`)}
-                  </p>
-                </div>
-              </ScrollReveal>
-            ))}
+                </ScrollReveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Daily Schedule */}
-      <section className="section-padding bg-muted">
-        <div className="section-container">
-          <ScrollReveal>
-            <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-3">
-              {t("studentLife.scheduleTitle")}
-            </h2>
-            <p className="text-muted-foreground text-center max-w-xl mx-auto mb-12">
-              {t("studentLife.scheduleSubtitle")}
-            </p>
-          </ScrollReveal>
-          <div className="max-w-2xl mx-auto">
-            {schedule.map((item, i) => (
-              <ScrollReveal key={i} delay={i * 50}>
-                <div className="flex items-start gap-4 py-4 border-b border-border last:border-0">
-                  <span className="font-heading font-bold text-primary min-w-[80px] text-sm">{item.time}</span>
-                  <span className="text-foreground">{lang === "sw" ? item.sw : item.en}</span>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
+        {/* Daily Schedule */}
+        <section className="section-padding bg-muted" aria-label="Daily schedule">
+          <div className="section-container">
+            <ScrollReveal>
+              <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-3">
+                {t("studentLife.scheduleTitle")}
+              </h2>
+              <p className="text-muted-foreground text-center max-w-xl mx-auto mb-12">
+                {t("studentLife.scheduleSubtitle")}
+              </p>
+            </ScrollReveal>
 
-      {/* Support */}
-      <section className="section-padding">
-        <div className="section-container">
-          <ScrollReveal>
-            <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-3">
-              {t("studentLife.supportTitle")}
-            </h2>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
-            {["counseling", "career", "academic"].map((key, i) => (
-              <ScrollReveal key={key} delay={i * 100}>
-                <div className="bg-card rounded-xl border border-border p-6 text-center card-shadow h-full">
-                  <h3 className="font-heading font-bold text-base mb-2 text-foreground">{t(`studentLife.support.${key}`)}</h3>
-                  <p className="text-sm text-muted-foreground">{t(`studentLife.support.${key}Desc`)}</p>
-                </div>
-              </ScrollReveal>
-            ))}
+            <div className="max-w-2xl mx-auto">
+              {schedule.map((item, i) => (
+                <ScrollReveal key={i} delay={i * 50}>
+                  <div className="flex items-start gap-4 py-4 border-b border-border last:border-0">
+                    <span className="font-heading font-bold text-primary min-w-[80px] text-sm">
+                      {item.time}
+                    </span>
+                    <span className="text-foreground">
+                      {lang === "sw" ? item.sw : item.en}
+                    </span>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
-    </main>
+        </section>
+
+        {/* Support */}
+        <section className="section-padding" aria-label="Student support services">
+          <div className="section-container">
+            <ScrollReveal>
+              <h2 className="text-2xl lg:text-4xl font-heading font-bold text-foreground text-center mb-3">
+                {t("studentLife.supportTitle")}
+              </h2>
+            </ScrollReveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-10">
+              {["counseling", "career", "academic"].map((key, i) => (
+                <ScrollReveal key={key} delay={i * 100}>
+                  <div className="bg-card rounded-xl border border-border p-6 text-center card-shadow h-full">
+                    <h3 className="font-heading font-bold text-base mb-2 text-foreground">
+                      {t(`studentLife.support.${key}`)}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {t(`studentLife.support.${key}Desc`)}
+                    </p>
+                  </div>
+                </ScrollReveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      </main>
+    </>
   );
 }

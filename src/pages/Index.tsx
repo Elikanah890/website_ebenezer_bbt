@@ -6,7 +6,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import AnimatedCounter from "@/components/AnimatedCounter";
 import { HandHelping, Users, Lightbulb, TreePine } from "lucide-react";
 import heroBg from "@/assets/hero-bg.jpg";
-import { Helmet } from "react-helmet-async"; // ✅ SEO
+import { Helmet } from "react-helmet-async";
 
 const courses = [
   { key: "sewing", icon: Scissors, duration: "6", color: "bg-college-gold-light text-college-gold" },
@@ -34,7 +34,7 @@ export default function HomePage() {
 
   return (
     <>
-      {/* ✅ SEO */}
+      {/* SEO */}
       <Helmet>
         <title>Pamoja Ebenezer College of Agriculture | Vocational Training Tanzania</title>
         <meta
@@ -47,16 +47,24 @@ export default function HomePage() {
         />
         <meta name="author" content="Pamoja Ebenezer College" />
 
-        {/* Social Media Preview */}
+        {/* Canonical */}
+        <link rel="canonical" href="https://pamojebenezercollege.ac.tz/" />
+
+        {/* Open Graph */}
         <meta property="og:title" content="Pamoja Ebenezer College of Agriculture" />
         <meta
           property="og:description"
           content="Vocational training for Tanzanian youth in agriculture, sewing, animal health, and computer studies."
         />
         <meta property="og:type" content="website" />
+        <meta property="og:image" content="/hero-bg.jpg" />
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
 
       <main>
+
         {/* Hero */}
         <section className="relative min-h-[90vh] lg:min-h-screen flex items-center">
           <div className="absolute inset-0">
@@ -66,12 +74,15 @@ export default function HomePage() {
               className="w-full h-full object-cover"
               width={1920}
               height={1080}
+              loading="eager"
+              decoding="async"
             />
             <div className="absolute inset-0 gradient-hero opacity-80" />
           </div>
 
           <div className="relative section-container py-24 lg:py-32">
             <div className="max-w-2xl">
+
               <ScrollReveal>
                 <p className="text-accent font-heading font-bold text-sm tracking-widest uppercase mb-4">
                   NACTVET REG/0999P
@@ -104,18 +115,21 @@ export default function HomePage() {
                   </Link>
                 </div>
               </ScrollReveal>
+
             </div>
           </div>
         </section>
 
         {/* Stats */}
-        <section className="bg-muted section-padding">
+        <section className="bg-muted section-padding" aria-label="Key statistics">
           <div className="section-container">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
               {stats.map((stat) => (
                 <div key={stat.key} className="text-center space-y-1">
                   <AnimatedCounter end={stat.value} suffix={stat.suffix} />
-                  <p className="text-sm text-muted-foreground font-medium">{t(stat.key)}</p>
+                  <p className="text-sm text-muted-foreground font-medium">
+                    {t(stat.key)}
+                  </p>
                 </div>
               ))}
             </div>
@@ -138,7 +152,11 @@ export default function HomePage() {
               {courses.map((course, i) => (
                 <ScrollReveal key={course.key} delay={i * 100}>
                   <div className="group bg-card rounded-xl border border-border p-6 card-shadow hover:card-shadow-hover hover:-translate-y-1 transition-all duration-300 touch-feedback h-full flex flex-col">
-                    <div className={`w-12 h-12 rounded-lg ${course.color} flex items-center justify-center mb-4`}>
+
+                    <div
+                      className={`w-12 h-12 rounded-lg ${course.color} flex items-center justify-center mb-4`}
+                      aria-hidden="true"
+                    >
                       <course.icon className="w-6 h-6" />
                     </div>
 
@@ -152,11 +170,11 @@ export default function HomePage() {
 
                     <div className="flex items-center gap-4 text-xs text-muted-foreground mb-4">
                       <span className="flex items-center gap-1">
-                        <Clock className="w-3.5 h-3.5" />
+                        <Clock className="w-3.5 h-3.5" aria-hidden="true" />
                         {course.duration} {t("courses.months")}
                       </span>
                       <span className="flex items-center gap-1">
-                        <GraduationCap className="w-3.5 h-3.5" />
+                        <GraduationCap className="w-3.5 h-3.5" aria-hidden="true" />
                         {t("courses.std7")}
                       </span>
                     </div>
@@ -197,7 +215,11 @@ export default function HomePage() {
               {whyItems.map((item, i) => (
                 <ScrollReveal key={item.key} delay={i * 100}>
                   <div className="bg-card rounded-xl p-6 text-center card-shadow hover:card-shadow-hover transition-all duration-300 h-full">
-                    <div className="w-14 h-14 rounded-full bg-college-green-light flex items-center justify-center mx-auto mb-4">
+
+                    <div
+                      className="w-14 h-14 rounded-full bg-college-green-light flex items-center justify-center mx-auto mb-4"
+                      aria-hidden="true"
+                    >
                       <item.icon className="w-7 h-7 text-primary" />
                     </div>
 
@@ -208,6 +230,7 @@ export default function HomePage() {
                     <p className="text-sm text-muted-foreground">
                       {t(`why.${item.key}Desc`)}
                     </p>
+
                   </div>
                 </ScrollReveal>
               ))}
@@ -238,6 +261,7 @@ export default function HomePage() {
             </ScrollReveal>
           </div>
         </section>
+
       </main>
     </>
   );

@@ -16,6 +16,9 @@ const navItems = [
   { key: "nav.gallery", path: "/gallery" },
   { key: "nav.contact", path: "/contact" },
   { key: "nav.faq", path: "/faq" },
+
+  // ✅ ADDED (only change)
+  { key: "Organization", path: "/organization" },
 ];
 
 export default function Navbar() {
@@ -82,7 +85,6 @@ export default function Navbar() {
       {/* Mobile Menu Overlay */}
       {open && (
         <div className="fixed inset-0 z-[110] lg:hidden">
-          {/* Full opaque overlay for clarity */}
           <div
             className="absolute inset-0 bg-background"
             onClick={() => setOpen(false)}
