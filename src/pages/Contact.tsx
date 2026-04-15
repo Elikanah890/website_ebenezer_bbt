@@ -20,7 +20,7 @@ export default function ContactPage() {
     if (!form.course) return;
 
     const text = `Hello, my name is ${form.name}. I am interested in: ${form.course}. ${form.message}`;
-    const url = `https://wa.me/255794820139?text=${encodeURIComponent(text)}`;
+    const url = `https://wa.me/255 614 878 752?text=${encodeURIComponent(text)}`;
     window.open(url, "_blank");
   };
 
